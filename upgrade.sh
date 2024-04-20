@@ -16,63 +16,63 @@ function spinner() {
   printf "\e[0m\e[1A\e[7D\n"
 }
 
-# Stop ceremonyclient service (with spinner)
+# Stop ceremonyclient service (background & spinner)
 service ceremonyclient stop &
 spin_pid=$!
 echo -n "Stopping ceremonyclient service..."
 spinner $spin_pid
 wait $spin_pid
-sleep 1  # Introduce 1 second delay
+echo  # Print a newline after stopping service
 
-# Navigate to ceremonyclient directory
-cd ~/ceremonyclient
-
-# Fetch updates (with spinner)
+# Fetch updates (background & spinner)
 git fetch origin &
 spin_pid=$!
 echo -n "Fetching latest updates..."
 spinner $spin_pid
 wait $spin_pid
-sleep 1  # Introduce 1 second delay
+echo  # Print a newline after fetching updates
 
-# Merge updates (with spinner)
+# Merge updates (background & spinner)
 git merge origin &
 spin_pid=$!
 echo -n "Merging updates..."
 spinner $spin_pid
 wait $spin_pid
-sleep 1  # Introduce 1 second delay
+echo  # Print a newline after merging updates
 
-# Move to node directory
-cd ~/ceremonyclient/node
+# Move to node directory (background)
+cd ~/ceremonyclient &
 
-# Clean project (with spinner)
+# Clean project (background & spinner)
 GOEXPERIMENT=arenas go clean -v -n -a ./... &
 spin_pid=$!
 echo -n "Cleaning project..."
 spinner $spin_pid
 wait $spin_pid
-sleep 1  # Introduce 1 second delay
+echo  # Print a newline after cleaning project
 
-# Remove old binary
-rm /root/go/bin/node
+# Remove old binary (background)
+rm /root/go/bin/node &
 
 # List contents of /root/go/bin (optional)
-ls /root/go/bin
+# ls /root/go/bin
 
-# Build and install project (with spinner)
+# Build and install project (background & spinner)
 GOEXPERIMENT=arenas go install ./... &
 spin_pid=$!
 echo -n "Building and installing..."
 spinner $spin_pid
 wait $spin_pid
-sleep 1  # Introduce 1 second delay
+echo  # Print a newline after building and installing
 
 # List contents of /root/go/bin (optional)
-ls /root/go/bin
+# ls /root/go/bin
 
-# Start ceremonyclient service
-service ceremonyclient start
+# Start ceremonyclient service (background)
+service ceremonyclient start &
+
+# Wait for all background jobs to finish before showing logs
+wait
 
 # Clear terminal screen
 clear
