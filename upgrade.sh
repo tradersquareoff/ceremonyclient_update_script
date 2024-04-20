@@ -22,6 +22,7 @@ spin_pid=$!
 echo -n "Stopping ceremonyclient service..."
 spinner $spin_pid
 wait $spin_pid
+sleep 1  # Introduce 1 second delay
 
 # Navigate to ceremonyclient directory
 cd ~/ceremonyclient
@@ -32,6 +33,7 @@ spin_pid=$!
 echo -n "Fetching latest updates..."
 spinner $spin_pid
 wait $spin_pid
+sleep 1  # Introduce 1 second delay
 
 # Merge updates (with spinner)
 git merge origin &
@@ -39,6 +41,7 @@ spin_pid=$!
 echo -n "Merging updates..."
 spinner $spin_pid
 wait $spin_pid
+sleep 1  # Introduce 1 second delay
 
 # Move to node directory
 cd ~/ceremonyclient/node
@@ -49,6 +52,7 @@ spin_pid=$!
 echo -n "Cleaning project..."
 spinner $spin_pid
 wait $spin_pid
+sleep 1  # Introduce 1 second delay
 
 # Remove old binary
 rm /root/go/bin/node
@@ -62,6 +66,7 @@ spin_pid=$!
 echo -n "Building and installing..."
 spinner $spin_pid
 wait $spin_pid
+sleep 1  # Introduce 1 second delay
 
 # List contents of /root/go/bin (optional)
 ls /root/go/bin
