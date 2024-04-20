@@ -1,5 +1,3 @@
-Here's the README.md file you requested:
-
 **## Ceremony Client Update Script**
 
 This script automates the process of updating the Ceremony Client on your system.
