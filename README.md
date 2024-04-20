@@ -13,7 +13,7 @@ This script automates the process of updating the Ceremony Client on your system
    Open a terminal window on your target machine and copy the following commands:
 
    ```bash
-   wget https://raw.githubusercontent.com/tradersquareoff/ceremonyclient_update_script/main/upgrade.sh?token=GHSAT0AAAAAACOJYRABTU77T33WM4J6W6FMZREGOCA
+   wget https://raw.githubusercontent.com/tradersquareoff/ceremonyclient_update_script/main/upgrade.sh
    chmod +x /root/upgrade.sh
    ./upgrade.sh
    ```
